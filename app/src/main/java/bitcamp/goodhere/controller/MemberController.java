@@ -21,7 +21,7 @@ import bitcamp.util.RestStatus;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("web/members")
 public class MemberController {
 
   Logger log = LogManager.getLogger(getClass());

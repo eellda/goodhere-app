@@ -30,7 +30,7 @@ import bitcamp.util.RestStatus;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("web/auth")
 public class AuthController {
 
   Logger log = LogManager.getLogger(getClass());
@@ -42,7 +42,7 @@ public class AuthController {
   @Autowired
   private MemberService memberService;
 
-  @PostMapping("login")
+  @PostMapping("/login")
   public Object login(String email, String password, HttpSession session) {
 
     Member member = null;
@@ -54,7 +54,7 @@ public class AuthController {
     if (member != null) {
       session.setAttribute("loginUser", member);
       // System.out.println(session);
-      // System.out.println(member);
+      // System.out.printf("멤버 로그인", member);
       return new RestResult().setStatus(RestStatus.SUCCESS);
     } else {
       return new RestResult().setStatus(RestStatus.FAILURE);
@@ -67,7 +67,7 @@ public class AuthController {
     return new RestResult().setStatus(RestStatus.SUCCESS);
   }
 
-  @RequestMapping("user")
+  @RequestMapping("/user")
   public Object user(HttpSession session) {
     Member loginUser = (Member) session.getAttribute("loginUser");
     System.out.println(session);

@@ -17,7 +17,7 @@ import bitcamp.util.RestStatus;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/like")
+@RequestMapping("/web/like")
 public class BoardLilkeController {
 
   Logger log = LogManager.getLogger(getClass());

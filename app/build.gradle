@@ -13,6 +13,25 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.4'
     id 'io.spring.dependency-management' version '1.1.0'
+    id "com.github.node-gradle.node" version "3.5.1"
+}
+
+node {
+  //version = '17.6.0'
+  //npmVersion = '8.5.1'
+  download = true
+}
+/*
+tasks.register("npm-install") {
+  group = "application"
+  description = "Installs dependencies from package.json"
+  tasks.appNpmInstall.exec();
+}
+*/
+task appNpmInstall(type: NpmTask) {
+  description = "Installs dependencies from package.json"
+  workingDir = file("${projectDir}/src/main/resources/static");
+  args = ["install"]
 }
 
 group = 'bitcamp'
@@ -63,6 +82,7 @@ dependencies {
   implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.4'
   implementation 'com.google.api-client:google-api-client:1.32.1'
   implementation 'com.google.api-client:google-api-client-gson:1.32.1'
+  testImplementation 'junit:junit:4.13.2'
     
   //implementation 'commons-io:commons-io:2.11.0'
   // implementation 'org.apache.tika:tika-core:1.27'
@@ -76,3 +96,51 @@ application {
      // Define the main class for the application.
      mainClass = 'bitcamp.goodhere.App'
  }
+
+ // React build 설정
+def webappDir = "$projectDir/src/main/resources/webapp"
+
+sourceSets {
+  main {
+    resources {
+      srcDirs = ["$webappDir/build", "$projectDir/src/main/resources"]
+    }
+  }
+}
+
+processResources {
+  dependsOn "copyWebApp"
+}
+
+
+task copyWebApp(type: Copy) {
+    dependsOn "buildReact"
+    from "$webappDir/build"
+    into "$projectDir/src/main/resources/static"
+}
+
+
+task buildReact(type: Exec) {
+  dependsOn "installReact"
+  workingDir "$webappDir"
+  inputs.dir "$webappDir"
+  group = BasePlugin.BUILD_GROUP
+  if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+    commandLine "npm.cmd", "run-script", "build"
+  } else {
+    commandLine "npm", "run-script", "build"
+  }
+}
+
+task installReact(type: Exec) {
+  workingDir "$webappDir"
+  inputs.dir "$webappDir"
+  group = BasePlugin.BUILD_GROUP
+  if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+    commandLine "npm.cmd", "audit", "fix"
+    commandLine 'npm.cmd', 'install'
+  } else {
+    commandLine "npm", "audit", "fix"
+    commandLine 'npm', 'install'
+  }
+}

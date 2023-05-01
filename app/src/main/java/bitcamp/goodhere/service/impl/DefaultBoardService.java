@@ -66,7 +66,6 @@ public class DefaultBoardService implements BoardService {
   public void delete(int no) {
     replyDao.deleteOfBoard(no);
     boardFileDao.deleteOfBoard(no);
-    System.out.println("delet g호출");
     if (boardDao.delete(no) == 0) {
       throw new RuntimeException("게시글이 존재하지 않습니다!");
     }

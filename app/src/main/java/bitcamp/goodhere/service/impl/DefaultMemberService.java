@@ -34,9 +34,12 @@ public class DefaultMemberService implements MemberService {
   @Override
   public Member get(String email, String password) {
     Map<String,Object> paramMap = new HashMap<>();
+    System.out.println("멤버 get 호출");
+    System.out.printf("==>>>", email);
+    System.out.printf("==>>>", password);
     paramMap.put("email", email);
     paramMap.put("password", password);
-
+    
     return memberDao.findByEmailAndPassword(paramMap);
   }
 

@@ -25,12 +25,11 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/" element={<Main />} />
+        <Route path="/web/" element={<Main />} />
           <Route path="/Main" element={<Main />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Sign" element={<Sign />} />
           <Route path="/Board" element={<Board />} />
-          {/* <Route path="/Form" element={<Form />} /> */}
           <Route path="/Info" element={<Info />} />
           <Route path="/AdminMember" element={<AdminMember />} />
           <Route path="/AdminBoard" element={<AdminBoard />} />
@@ -42,8 +41,7 @@ function App() {
           <Route
             path="/FormUpdate/:no"
             element={<FormUpdate />}
-            // file={file}
-            // setFile={setFile}
+
           />
         </Routes>
 

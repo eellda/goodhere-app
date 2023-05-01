@@ -4,9 +4,14 @@
     width: 640px;
 }
 
+/* .form-box-input-form {
+    border: 1px solid blue;
+    height: 520px;
+} */
+
 .form-b-m {
     text-align: center;
-
+    /* border: 1px solid black; */
     height: 520px;
 }
 

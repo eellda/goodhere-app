@@ -20,7 +20,7 @@ import bitcamp.util.RestStatus;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("replys/child")
+@RequestMapping("/web/replys/child")
 public class ChildReplyController {
   Logger log = LogManager.getLogger(getClass());
 

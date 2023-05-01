@@ -25,7 +25,7 @@ import bitcamp.util.RestStatus;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/boards")
+@RequestMapping("web/boards")
 public class BoardController {
 
   // 입력: POST   => /boards
@@ -162,7 +162,6 @@ public class BoardController {
     Member loginUser = (Member) session.getAttribute("loginUser");
 
     Board old = boardService.get(no);
-    System.out.println("delete 호출");
     if (old.getWriter().getNo() != loginUser.getNo()) {
       return new RestResult()
           .setStatus(RestStatus.FAILURE)
@@ -184,7 +183,6 @@ public class BoardController {
       HttpSession session) {
     Member loginUser = (Member) session.getAttribute("loginUser");
     Board old = boardService.get(boardNo);
-
 
     if (old.getWriter().getNo() != loginUser.getNo()) {
       return new RestResult()
