@@ -1,0 +1,57 @@
+.wrapper {
+  width: auto;
+  height: 640px;
+  padding: 20px; 
+  background: transparent;
+  border: 2px solid rgba(175, 172, 172, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(116, 114, 114, 0.5);
+}
+
+.ct {
+  padding-right: 50px;
+}
+
+.tt {
+  padding-right: 78px;
+}
+
+.fu {
+  padding-right: 32px;
+}
+
+.file-name {
+  list-style-type : none
+}
+
+
+
+.form-box h2 {
+  font-size: 2em;
+  color: #162938;
+  text-align: center;
+}
+
+.form-box-input-form {
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.form-box-input-box {
+  margin: 50px 20px 0 20px;
+  width: 500px;
+  height: 400px;
+  background: transparent;
+  border: 2px solid rgba(175, 172, 172, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(116, 114, 114, 0.5);
+}
+
+
+.justify-content-center {
+  margin: 70px auto 0 auto;
+  float: right;
+}

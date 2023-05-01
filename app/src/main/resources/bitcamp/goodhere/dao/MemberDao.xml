@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.goodhere.dao.MemberDao">
+
+  <resultMap type="member" id="memberMap">
+    <id column="member_id" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="tel" property="tel"/>
+    <result column="nickname" property="nickname"/>
+    <result column="introduce" property="introduce"/>
+    <result column="photo" property="photo"/>
+    <result column="created_date" property="createdDate"/>
+    <result column="state" property="state"/>
+    <result column="auth" property="auth"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="member" 
+          useGeneratedKeys="true" keyProperty="no" keyColumn="member_id">
+    insert into gh_member(email, pwd, name, tel, nickname) 
+    values(#{email}, sha2(#{password}, 256), #{name}, #{tel}, #{nickname})
+  </insert>
+
+  <select id="findAll" resultMap="memberMap">
+    select 
+      member_id, 
+      email, 
+      name, 
+      tel, 
+      nickname, 
+      introduce, 
+      photo, 
+      created_date, 
+      state, 
+      auth 
+    from 
+      gh_member 
+    order by 
+      member_id desc
+  </select>
+
+  <select id="findByNo" parameterType="int" resultMap="memberMap">
+    select 
+      member_id, 
+      email, 
+      name, 
+      tel, 
+      nickname, 
+      introduce, 
+      photo, 
+      created_date, 
+      state, 
+      auth 
+    from 
+      gh_member 
+    where 
+      member_id=#{no}
+  </select>
+  
+    <select id="findByEmailAndPassword" parameterType="map" resultMap="memberMap">
+    select
+      member_id, 
+      email, 
+      name, 
+      tel, 
+      nickname, 
+      introduce, 
+      photo, 
+      created_date, 
+      state, 
+      auth 
+    from 
+      gh_member 
+    where 
+      email = #{email} and pwd = sha2(#{password},256)
+  </select>
+  
+  <update id="update" parameterType="member">
+    update gh_member set
+      email=#{email}, 
+      name=#{name}, 
+      tel=#{tel}, 
+      nickname=#{nickname}, 
+      introduce=#{introduce},
+      photo=#{photo}, 
+      state=#{state}, 
+      auth=#{auth} 
+    where member_id=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from gh_member
+    where member_id=#{no}
+  </delete>
+  
+  <!-- 아이디 중복 체크 -->
+  <select id="emailCheck" parameterType="string" resultType="int">
+    select count(email) from gh_member where email=#{email}
+  </select>
+  
+  <!-- 닉네임 중복 체크 -->
+  <select id="nickCheck" parameterType="string" resultType="int">
+    select count(nickname) from gh_member where nickname=#{nickname}
+  </select>
+  
+  <!-- 페이스북 -->
+  <select id="findByEmail" parameterType="string" resultMap="memberMap">
+    select 
+      member_id, 
+      email, 
+      name, 
+      tel, 
+      nickname, 
+      introduce, 
+      photo, 
+      created_date, 
+      state, 
+      auth 
+    from 
+      gh_member
+    where 
+      email = #{email}
+  </select>
+  
+</mapper>
+
+
+
+
+

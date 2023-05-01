@@ -1,0 +1,27 @@
+.form-box-m {
+    border: 1px solid rgb(226, 224, 224);
+    border-radius: 8px;
+    width: 640px;
+}
+
+.form-b-m {
+    text-align: center;
+
+    height: 520px;
+}
+
+.ct-m {
+    padding-right: 50px;
+}
+
+.tt-m {
+    padding-right: 50px;
+}
+
+.fu-m {
+    padding-right: 58px;
+}
+
+.cc-m {
+    height: 400px;
+}
